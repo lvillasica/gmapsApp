@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GmapsApp</title>
+  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body onload="initialize()">
+
+    <%= yield %>
+    <div>
+      Enter Location: 
+      <input id="address" type="textbox" value="Cebu City">
+      <input type="button" value="Search" onclick="codeAddress()">
+    </div>
+    <div id="map_canvas" style="width: 100%; height: 480px;"></div>
+
+
+</body>
+</html>

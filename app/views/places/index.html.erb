@@ -1,0 +1,13 @@
+<h1>ADMIN</h1>
+
+<table>
+  <% @places.each do |place| %>
+  <tr>
+    <td><%= link_to place.place_name, place %></td>
+    <td><%= link_to 'Edit', edit_place_path(place) %></td>
+    <td><%= link_to 'Delete', place_path(place), :method => :delete, :confirm => "Are you sure?" %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= link_to 'Add New Place', new_place_path %>
