@@ -24,4 +24,11 @@ class LoginsController < ApplicationController
     end
   end
 
+  def destroy
+    # Remove the user id from the session
+    session[:current_user_id] = nil
+    redirect_to root_url
+  end
+
+
 end

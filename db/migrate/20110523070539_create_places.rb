@@ -2,6 +2,8 @@ class CreatePlaces < ActiveRecord::Migration
   def self.up
     create_table :places do |t|
       t.string :place_name
+      t.float :lat
+      t.float :long
 
       t.timestamps
     end

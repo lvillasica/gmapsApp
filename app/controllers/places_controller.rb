@@ -1,10 +1,13 @@
 class PlacesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :search]
+  
   def index
     @places = Place.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @places }
     end
+    
   end
 
   def show
@@ -62,6 +65,16 @@ class PlacesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(places_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def search
+    @lat = nil
+    @long = nil
+    @place = Place.find_by_place_name(params[:place][:place_name])
+    if @place
+      @lat = @place.lat
+      @long = @place.long
     end
   end
 

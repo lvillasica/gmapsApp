@@ -1,14 +1,16 @@
 GmapsApp::Application.routes.draw do
+  devise_for :users
+
   resources :users
 
-  resources :user_sessions
-
   get "places/index"
-  resources :places, :logins
+  resources :places do
+    collection do
+      get :search
+    end
+  end
   root :to => "places#index"
 
-  match "login", :controller => "user_sessions", :action => "new"
-  match "logout", :controller => "user_sessions", :action => "destroy"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
