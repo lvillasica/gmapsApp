@@ -1,5 +1,5 @@
-<div style="display:block;float:left;">
 <%= form_for(@place) do |f| %>
+<div class="form_content">
   <% if @place.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
@@ -14,7 +14,7 @@
  
   <div class="field">
     <%= f.label :place_name %><br />
-    <%= f.text_field :place_name %>
+    <%= f.text_field :place_name, :onchange => "clear_latlng()" %>
     <input type="button" value="Search" onclick="admincodeAddress()">
   </div>
   
@@ -30,11 +30,15 @@
   
   <br />
   <div class="actions">
-    <%= f.submit %>
+    <% if current_user and @place.status == "Pending" %>
+      <%= f.submit "Approve" %>
+    <% else %>
+      <%= f.submit %>
+    <% end %>
   </div>
   <%= link_to 'Back', places_path %>
 </div>
-<div style="display:block;float:left;margin-left:3em;width:50%">
-  <div id="map_canvas" style="width: 100%; height: 480px;"></div>
+<div class="form_content">
+  <div id="map_canvas"></div>
 </div>
 <% end %>

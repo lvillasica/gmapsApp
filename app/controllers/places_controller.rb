@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :search]
+  before_filter :authenticate_user!, :except => [:index, :search, :new, :create, :show]
   
   def index
     @places = Place.all
@@ -33,7 +33,11 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.new(params[:place])
-
+    if current_user
+      @place.status = "Approved"
+    else
+      @place.status = "Pending"
+    end
     respond_to do |format|
       if @place.save
         format.html { redirect_to(@place, :notice => 'place was successfully created.') }
@@ -47,6 +51,9 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
+    if current_user
+      @place.status = "Approved"
+    end
     respond_to do |format|
       if @place.update_attributes(params[:place])
         format.html { redirect_to(@place, :notice => 'place was successfully updated.') }
@@ -71,10 +78,12 @@ class PlacesController < ApplicationController
   def search
     @lat = nil
     @long = nil
+    @stat = nil
     @place = Place.find_by_place_name(params[:place][:place_name])
     if @place
       @lat = @place.lat
       @long = @place.long
+      @stat = @place.status
     end
   end
 

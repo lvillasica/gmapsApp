@@ -18,13 +18,25 @@
   }
 
   function admincodeAddress() {
+    initialize();
+    var lat = document.getElementById("place_lat").value;
+    var lng = document.getElementById("place_long").value;
+    var latlng = new google.maps.LatLng(lat, lng);
     var address = document.getElementById("place_place_name").value;
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
+        if(document.getElementById("place_lat").value=='') 
+          latlng = results[0].geometry.location;
+        map.setCenter(latlng);
+        /*if(results[1]){
+          var r = confirm("Do you like to use the formatted address which is "+results[1].formatted_address+"?");
+          if (r==true){
+            document.getElementById("place_place_name").value = results[1].formatted_address;
+          }
+        }*/
         var marker = new google.maps.Marker({
             map: map,
-            position: results[0].geometry.location,
+            position: latlng,
             draggable: true
         });
         google.maps.event.addListener(marker, "dragend", function() {
@@ -41,6 +53,7 @@
   }
 
   function codeLatLng(lat, lng) {
+    initialize();
     var latlng = new google.maps.LatLng(lat, lng);
     geocoder.geocode({'latLng': latlng}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -58,5 +71,10 @@
         alert("Geocoder failed due to: " + status);
       }
     });
+  }
+
+  function clear_latlng(){
+    document.getElementById("place_lat").value = "";
+		document.getElementById("place_long").value = "";
   }
 

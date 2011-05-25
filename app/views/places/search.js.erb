@@ -1,1 +1,7 @@
-codeLatLng(<%= @lat %>,<%= @long %>)
+<% if @lat == nil and @long == nil %>
+  alert("The place you wish to search is not yet available. Just create request.");
+<% elsif @stat == "Pending" %>
+  alert("The place you wish to search is available but not yet approved.");
+<% else %>
+  codeLatLng(<%= @lat %>,<%= @long %>)
+<% end %>

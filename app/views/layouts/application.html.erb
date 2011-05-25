@@ -7,9 +7,12 @@
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
-<body onload="initialize()">
-
+<body>
+  <div id="head">
+    <h1>GMaps App</h1>
+  </div>
+  <div id="main">
     <%= yield %>
-
+  </div>
 </body>
 </html>

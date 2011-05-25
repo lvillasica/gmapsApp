@@ -1,9 +1,28 @@
-body { background-color: #fff; color: #333; }
+body { 
+  background-color: #C0C0C0; 
+  color: #606060;
+  background-color: #101010;
+}
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
+  padding: 3px;
+}
+
+#head{
+  text-align: center;
+  color: Black;
+  font-weight: bolder;
+  font-family: sans-serif;
+  background-color: #686868;
+  width: 981px;
+  padding: 2em;
+  margin: auto;
+  -webkit-border-radius: 22px;
+  -moz-border-radius: 22px;
+  border-radius: 22px;
 }
 
 pre {
@@ -53,4 +72,24 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+#main{
+  width: 981px;
+  margin: auto;
+  border: 3px solid #707070 ;
+  padding: 5px;
+  background-color: #B8B8B8;
+}
+.form_content{
+  display:block;
+  float:left;
+  margin-top:3em;
+  width:50%;
+}
+#map_canvas{
+  width: 95%; height: 440px;
+  background-color: #282828;
+  border: 4px solid;
+  margin: 20px;
 }
